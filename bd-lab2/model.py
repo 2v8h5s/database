@@ -193,19 +193,3 @@ class sql:
             view.error(e)
         finally:
             self.close()
-
-    def full_text_search(self, table, text_col, txt, search_mode=1):
-        col_names, col_types, pkeys, fkeys = self.get_col_info(table)
-        try:
-            self.connect()
-            self.cr.execute(
-                psycopg2.sql.SQL(
-                    "SELECT * FROM public.{} WHERE {} (to_tsvector({}) @@ to_tsquery(%s));")
-                .format(psycopg2.sql.Identifier(table), psycopg2.sql.SQL("NOT" if search_mode == 1 else ""),
-                        psycopg2.sql.SQL(text_col)), (('|' if search_mode == 1 else '&').join(txt),))
-            data = self.cr.fetchall()
-            view.print_table(col_names, col_types, pkeys, fkeys, data)
-        except (Exception, ps2.Error) as e:
-            view.error(e)
-        finally:
-            self.close()

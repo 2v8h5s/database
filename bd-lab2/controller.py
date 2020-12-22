@@ -93,18 +93,6 @@ def menu_level3(db, table):
             except:
                 pass
         elif case3 == '7':
-            try:
-                col_names, col_types = db.get_column_names(table), db.get_column_types(table)
-                search_mode = int(selection(view.section_search_mode))
-                if search_mode in [1, 2]:
-                    text_col = col_names[int(selection(view.section_text_search_col, col_names))-1]
-                    txt = selection(view.enter_text).split()
-                    db.full_text_search(
-                        table, text_col, txt, search_mode=search_mode)
-                    selection()
-            except:
-                pass
-        elif case3 == '8':
             menu_level2(db)
             return
         else:

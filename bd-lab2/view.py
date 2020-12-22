@@ -26,8 +26,7 @@ def section_level3(*args):
     print('\t4. Delete')
     print('\t5. Generate random data')
     print('\t6. Search in two tables')
-    print('\t7. Full text search')
-    print('\t8. return back')
+    print('\t7. return back')
 
 
 def section_input(*args):
